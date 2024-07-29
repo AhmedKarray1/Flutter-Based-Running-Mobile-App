@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:running_app/screens/map_screen.dart';
-import 'screens/home_screen.dart';
+// import 'package:running_app/core/providers/permission_provider.dart';
+import 'ui/screens/permission_screen.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: RunnigApp()));
 }
 
-class MyApp extends StatelessWidget {
+class RunnigApp extends ConsumerWidget {
+  const RunnigApp({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    // final locationPermission = ref.watch(locationPermissionStatusProvider);
+
+    return const MaterialApp(
       title: 'Running Companion',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: HomeScreen(),
+      home: PermissionScreen(),
     );
   }
 }

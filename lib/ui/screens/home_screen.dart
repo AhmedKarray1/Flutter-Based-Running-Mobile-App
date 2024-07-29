@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:running_app/services/permission_service.dart';
-import '../providers/location_provider.dart';
+import 'package:running_app/ui/screens/map_screen.dart';
+import 'package:running_app/core/services/permission_service.dart';
+import '../../core/providers/location_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -13,15 +14,23 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Running Companion')),
       body: location.when(
-        data: (data) => Center(
-          child: Text('Location: ${data.latitude}, ${data.longitude}'),
+        data: (data) => MapScreen(
+          data: data,
         ),
         loading: () => const CircularProgressIndicator(),
         error: (error, stack) => Column(children: [
           Text('Error: $error'),
-          ElevatedButton(onPressed: () => PermissionService().requestLocationPermission(), child: Text("permission"))
+          ElevatedButton(
+            onPressed: () async {
+              final didGivePermission = await PermissionService().requestLocationPermission();
+              print(didGivePermission);
+            },
+            child: const Text("permission"),
+          )
         ]),
       ),
     );
   }
 }
+//  screen lel permission 
+// inherited widgets
