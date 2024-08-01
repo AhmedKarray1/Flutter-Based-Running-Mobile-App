@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:running_app/ui/app_colors.dart';
+import 'package:running_app/ui/screens/map_screen.dart';
+import '../../core/providers/view_model_provider.dart';
 
 class PermissionScreen extends ConsumerWidget {
   const PermissionScreen({super.key});
@@ -9,6 +11,8 @@ class PermissionScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final deviceHeight = MediaQuery.of(context).size.height;
     final deviceWidth = MediaQuery.of(context).size.width;
+    final permissionState = ref.watch(permissionViewModelProvider);
+    final permissionViewModel = ref.read(permissionViewModelProvider.notifier);
 
     return Scaffold(
       backgroundColor: AppColors.darkGray1,
@@ -44,7 +48,17 @@ class PermissionScreen extends ConsumerWidget {
               height: deviceHeight * 0.07,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () async {
+                await permissionViewModel.requestPermission();
+                if (permissionState.isLocationPermissionGranted) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MapScreen(),
+                    ),
+                  );
+                }
+              },
               child: Container(
                 height: deviceHeight * 0.06,
                 width: deviceWidth,
