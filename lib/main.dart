@@ -5,19 +5,33 @@ import 'package:running_app/ui/screens/permission_screen.dart';
 import 'package:running_app/ui/screens/map_screen.dart';
 
 void main() {
-  runApp(const ProviderScope(child: RunnigApp()));
+  runApp(const ProviderScope(child: RunningApp()));
 }
 
-class RunnigApp extends ConsumerWidget {
-  const RunnigApp({super.key});
+class RunningApp extends ConsumerWidget {
+  const RunningApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final permissionState = ref.watch(permissionViewModelProvider);
+    final permissionViewModel = ref.read(permissionViewModelProvider.notifier);
 
-    return MaterialApp(
-      title: 'Running Companion',
-      home: permissionState.isLocationPermissionGranted ? const MapScreen() : const PermissionScreen(),
+    return FutureBuilder(
+      future: permissionViewModel.loadPermissionStatus(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const MaterialApp(
+            home: Scaffold(
+              body: Center(child: CircularProgressIndicator()),
+            ),
+          );
+        }
+
+        final permissionState = ref.watch(permissionViewModelProvider);
+        return MaterialApp(
+          title: 'Running Companion',
+          home: permissionState.isLocationPermissionGranted ? const MapScreen() : const PermissionScreen(),
+        );
+      },
     );
   }
 }

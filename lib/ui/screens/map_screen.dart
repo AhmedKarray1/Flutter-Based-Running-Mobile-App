@@ -32,6 +32,8 @@ class _MapScreenState extends ConsumerState<MapScreen> with TickerProviderStateM
         ),
       );
     }
+    print("path length: ${locationState.path.length}");
+    print(locationState.path);
 
     return Scaffold(
       appBar: AppBar(
@@ -48,7 +50,16 @@ class _MapScreenState extends ConsumerState<MapScreen> with TickerProviderStateM
         ),
         children: [
           TileLayer(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+          ),
+          PolylineLayer(
+            polylines: [
+              Polyline(
+                points: locationState.path.map((loc) => LatLng(loc.latitude, loc.longitude)).toList(),
+                color: Colors.blue,
+                strokeWidth: 4.0,
+              ),
+            ],
           ),
           MarkerLayer(
             markers: [
