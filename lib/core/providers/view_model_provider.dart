@@ -10,5 +10,5 @@ final locationViewModelProvider = StateNotifierProvider<LocationViewModel, Locat
   (ref) => LocationViewModel(ref.read(locationServiceProvider)),
 );
 final permissionViewModelProvider = StateNotifierProvider<PermissionViewmodel, PermissionState>(
-  (ref) => PermissionViewmodel(ref.read(permissionServiceProvider)),
+  (ref) => PermissionViewmodel(ref.read(permissionServiceProvider), ref.read(sharedPreferencesServiceProvider)),
 );
