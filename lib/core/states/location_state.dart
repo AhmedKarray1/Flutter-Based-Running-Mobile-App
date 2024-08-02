@@ -3,19 +3,19 @@ import 'package:running_app/core/models/location_data.dart';
 class LocationState {
   LocationState({
     this.locationData,
-    this.getIt = false,
+    this.isLocationReady = false,
   });
 
   final LocationData? locationData;
-  final bool getIt;
+  final bool isLocationReady;
 
   LocationState copyWith({
     LocationData? locationData,
-    bool? getIt,
+    bool? isLocationReady,
   }) {
     return LocationState(
       locationData: locationData ?? this.locationData,
-      getIt: getIt ?? this.getIt,
+      isLocationReady: isLocationReady ?? this.isLocationReady,
     );
   }
 }

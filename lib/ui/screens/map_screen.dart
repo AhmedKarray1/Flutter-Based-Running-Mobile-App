@@ -25,7 +25,7 @@ class _MapScreenState extends ConsumerState<MapScreen> with TickerProviderStateM
   Widget build(BuildContext context) {
     final locationState = ref.watch(locationViewModelProvider);
 
-    if (!locationState.getIt) {
+    if (!locationState.isLocationReady) {
       return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),

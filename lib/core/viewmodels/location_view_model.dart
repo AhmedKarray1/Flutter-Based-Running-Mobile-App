@@ -11,7 +11,7 @@ class LocationViewModel extends StateNotifier<LocationState> {
 
   Future<void> getCurrentLocation() async {
     final locationData = await _locationService.getCurrentLocation();
-    state = state.copyWith(locationData: locationData, getIt: true);
+    state = state.copyWith(locationData: locationData, isLocationReady: true);
   }
 
   Stream<LocationData> locationStream() {
