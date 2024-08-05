@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:running_app/ui/app_colors.dart';
+import 'package:running_app/ui/presentation/app_colors.dart';
 import 'package:running_app/ui/screens/map_screen.dart';
+import 'package:running_app/ui/widgets/animated_popup.dart';
 import '../../core/providers/view_model_provider.dart';
 
 class PermissionScreen extends ConsumerWidget {
@@ -13,6 +14,16 @@ class PermissionScreen extends ConsumerWidget {
     final deviceWidth = MediaQuery.of(context).size.width;
     final permissionState = ref.watch(permissionViewModelProvider);
     final permissionViewModel = ref.read(permissionViewModelProvider.notifier);
+
+    void _showPermissionPopup() {
+      showDialog(
+        context: context,
+        barrierDismissible: true,
+        builder: (context) {
+          return const AnimatedPopup();
+        },
+      );
+    }
 
     return Scaffold(
       backgroundColor: AppColors.darkGray1,
@@ -51,12 +62,14 @@ class PermissionScreen extends ConsumerWidget {
               onTap: () async {
                 await permissionViewModel.requestPermission();
                 if (permissionState.isLocationPermissionGranted) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const MapScreen(),
-                    ),
-                  );
+                  if (context.mounted) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MapScreen(),
+                      ),
+                    );
+                  }
                 }
               },
               child: Container(
@@ -81,7 +94,9 @@ class PermissionScreen extends ConsumerWidget {
               height: deviceHeight * 0.02,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                _showPermissionPopup();
+              },
               child: SizedBox(
                 height: deviceHeight * 0.06,
                 width: deviceWidth,

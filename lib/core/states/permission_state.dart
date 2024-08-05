@@ -1,5 +1,5 @@
 class PermissionState {
-  PermissionState({
+  const PermissionState({
     this.isLocationPermissionGranted = false,
   });
 

@@ -68,10 +68,10 @@ class _MapScreenState extends ConsumerState<MapScreen> with TickerProviderStateM
               PolylineLayer(
                 polylines: [
                   Polyline(
-                    points: locationState.path.map((loc) => LatLng(loc.latitude, loc.longitude)).toList(),
-                    color: Colors.blue,
-                    strokeWidth: 4.0,
-                  ),
+                      points: locationState.path.map((loc) => LatLng(loc.latitude, loc.longitude)).toList(),
+                      color: Colors.blue,
+                      strokeWidth: 4.0,
+                      strokeJoin: StrokeJoin.round),
                 ],
               ),
               MarkerLayer(

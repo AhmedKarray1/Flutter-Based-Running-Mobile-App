@@ -12,6 +12,7 @@ class PermissionViewmodel extends StateNotifier<PermissionState> {
 
   Future<void> loadPermissionStatus() async {
     final isGranted = await sharedPreferencesService.getLocationPermission();
+
     state = state.copyWith(isLocationPermissionGranted: isGranted);
   }
 

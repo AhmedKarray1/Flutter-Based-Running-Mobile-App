@@ -16,7 +16,7 @@ class RunningApp extends ConsumerWidget {
     final permissionViewModel = ref.read(permissionViewModelProvider.notifier);
 
     return FutureBuilder(
-      future: permissionViewModel.loadPermissionStatus(),
+      future: permissionViewModel.setLocationPermission(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MaterialApp(
