@@ -6,6 +6,7 @@ class LocationService {
     Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high,
     );
+
     return LocationData(
       latitude: position.latitude,
       longitude: position.longitude,
