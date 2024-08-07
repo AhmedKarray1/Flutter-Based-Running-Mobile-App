@@ -1,18 +1,19 @@
 import 'package:flutter/foundation.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 @immutable
 class PermissionState {
   const PermissionState({
-    this.isLocationPermissionGranted = false,
+    this.permissionStatus = PermissionStatus.denied,
   });
 
-  final bool isLocationPermissionGranted;
+  final PermissionStatus permissionStatus;
 
   PermissionState copyWith({
-    bool? isLocationPermissionGranted,
+    PermissionStatus? permissionStatus,
   }) {
     return PermissionState(
-      isLocationPermissionGranted: isLocationPermissionGranted ?? this.isLocationPermissionGranted,
+      permissionStatus: permissionStatus ?? this.permissionStatus,
     );
   }
 }

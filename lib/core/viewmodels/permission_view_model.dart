@@ -13,29 +13,17 @@ class PermissionViewmodel extends StateNotifier<PermissionState> {
   final PermissionService permissionService;
   final SharedPreferencesService sharedPreferencesService;
 
-  Future<void> loadPermissionStatus() async {
-    final isGranted = await sharedPreferencesService.getLocationPermission();
-
-    state = state.copyWith(isLocationPermissionGranted: isGranted);
-  }
-
-  Future<void> setLocationPermission() async {
+  Future<void> getLocationPermission() async {
     final permissionStatus = await permissionService.getLocationPermissionStatus();
-    final isPermissionGranted = permissionStatus == PermissionStatus.granted;
-
-    if (permissionStatus == PermissionStatus.permanentlyDenied) {
-      openAppSettings();
-    }
+    print('Permission status: $permissionStatus');
 
     state = state.copyWith(
-      isLocationPermissionGranted: isPermissionGranted,
+      permissionStatus: permissionStatus,
     );
-    await sharedPreferencesService.setLocationPermission(isPermissionGranted);
   }
 
   Future<void> requestPermission() async {
     final didGivePermission = await permissionService.requestLocationPermission();
-    state = state.copyWith(isLocationPermissionGranted: didGivePermission);
-    await sharedPreferencesService.setLocationPermission(didGivePermission);
+    state = state.copyWith(permissionStatus: didGivePermission);
   }
 }

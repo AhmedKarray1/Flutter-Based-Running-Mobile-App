@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:running_app/core/providers/view_model_provider.dart';
 import 'package:running_app/ui/screens/permission_screen.dart';
 import 'package:running_app/ui/screens/map_screen.dart';
@@ -17,7 +18,7 @@ class RunningApp extends ConsumerWidget {
     final permissionViewModel = ref.read(permissionViewModelProvider.notifier);
 
     return FutureBuilder(
-      future: permissionViewModel.setLocationPermission(),
+      future: permissionViewModel.getLocationPermission(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const MaterialApp(
@@ -30,7 +31,9 @@ class RunningApp extends ConsumerWidget {
         final permissionState = ref.watch(permissionViewModelProvider);
         return MaterialApp(
           title: 'Running Companion',
-          home: permissionState.isLocationPermissionGranted ? const MapScreen() : const PermissionScreen(),
+          home: permissionState.permissionStatus == PermissionStatus.granted
+              ? const MapScreen()
+              : const PermissionScreen(),
         );
       },
     );

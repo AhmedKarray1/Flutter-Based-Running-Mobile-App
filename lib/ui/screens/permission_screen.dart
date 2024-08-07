@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:running_app/ui/presentation/app_colors.dart';
 import 'package:running_app/ui/screens/map_screen.dart';
 import 'package:running_app/ui/widgets/animated_popup.dart';
@@ -61,7 +62,7 @@ class PermissionScreen extends ConsumerWidget {
             GestureDetector(
               onTap: () async {
                 await permissionViewModel.requestPermission();
-                if (permissionState.isLocationPermissionGranted) {
+                if (permissionState.permissionStatus == PermissionStatus.granted) {
                   if (context.mounted) {
                     Navigator.push(
                       context,
