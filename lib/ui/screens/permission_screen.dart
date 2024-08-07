@@ -16,7 +16,7 @@ class PermissionScreen extends ConsumerWidget {
     final permissionState = ref.watch(permissionViewModelProvider);
     final permissionViewModel = ref.read(permissionViewModelProvider.notifier);
 
-    void _showPermissionPopup() {
+    void showPermissionPopup() {
       showDialog(
         context: context,
         barrierDismissible: true,
@@ -96,7 +96,7 @@ class PermissionScreen extends ConsumerWidget {
             ),
             GestureDetector(
               onTap: () {
-                _showPermissionPopup();
+                showPermissionPopup();
               },
               child: SizedBox(
                 height: deviceHeight * 0.06,

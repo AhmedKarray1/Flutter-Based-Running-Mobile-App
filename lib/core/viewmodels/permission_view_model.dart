@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:running_app/core/states/permission_state.dart';
 import '../services/permission_service.dart';
 import '../services/shared_preferences.dart';
