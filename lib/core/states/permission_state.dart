@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+
+@immutable
 class PermissionState {
   const PermissionState({
     this.isLocationPermissionGranted = false,

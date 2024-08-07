@@ -5,7 +5,10 @@ import '../services/permission_service.dart';
 import '../services/shared_preferences.dart';
 
 class PermissionViewmodel extends StateNotifier<PermissionState> {
-  PermissionViewmodel(this.permissionService, this.sharedPreferencesService) : super(PermissionState());
+  PermissionViewmodel(
+    this.permissionService,
+    this.sharedPreferencesService,
+  ) : super(const PermissionState());
 
   final PermissionService permissionService;
   final SharedPreferencesService sharedPreferencesService;
@@ -19,6 +22,10 @@ class PermissionViewmodel extends StateNotifier<PermissionState> {
   Future<void> setLocationPermission() async {
     final permissionStatus = await permissionService.getLocationPermissionStatus();
     final isPermissionGranted = permissionStatus == PermissionStatus.granted;
+
+    if (permissionStatus == PermissionStatus.permanentlyDenied) {
+      openAppSettings();
+    }
 
     state = state.copyWith(
       isLocationPermissionGranted: isPermissionGranted,

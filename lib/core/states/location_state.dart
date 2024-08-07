@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:running_app/core/models/location_data.dart';
 
+@immutable
 class LocationState {
-  LocationState({
+  const LocationState({
     this.locationData,
     this.isLocationReady = false,
     this.path = const [],

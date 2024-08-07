@@ -5,6 +5,7 @@ import 'package:running_app/ui/screens/permission_screen.dart';
 import 'package:running_app/ui/screens/map_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const ProviderScope(child: RunningApp()));
 }
 

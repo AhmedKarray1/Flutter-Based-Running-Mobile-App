@@ -19,7 +19,7 @@ class LocationViewModel extends StateNotifier<LocationState> {
   }
 
   void startRecording() {
-    _positionSubscription = _locationService.locationStream().listen((position) {
+    _positionSubscription = _locationService.locationStream().distinct().listen((position) {
       final locationData = LocationData(
         latitude: position.latitude,
         longitude: position.longitude,
