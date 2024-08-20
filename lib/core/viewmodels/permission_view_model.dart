@@ -26,4 +26,8 @@ class PermissionViewmodel extends StateNotifier<PermissionState> {
     final didGivePermission = await permissionService.requestLocationPermission();
     state = state.copyWith(permissionStatus: didGivePermission);
   }
+
+  Future<void> requestActivityRecognitionPermission() async {
+    await permissionService.requestActivityRecognitionPermission();
+  }
 }
