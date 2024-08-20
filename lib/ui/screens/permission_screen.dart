@@ -45,7 +45,8 @@ class PermissionScreen extends ConsumerWidget {
             ),
             Text(
               "Allow your location",
-              style: TextStyle(color: Colors.white, fontSize: deviceHeight * 0.04, fontWeight: FontWeight.bold),
+              style: TextStyle(color: Colors.white, fontSize: deviceHeight * 0.04, fontWeight: FontWeight.bold,),
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: deviceHeight * 0.02),
             Text(
