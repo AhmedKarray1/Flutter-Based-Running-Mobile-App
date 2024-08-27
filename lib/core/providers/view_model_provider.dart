@@ -6,9 +6,12 @@ import 'package:running_app/core/states/permission_state.dart';
 import '../viewmodels/location_view_model.dart';
 import '../viewmodels/permission_view_model.dart';
 
-final locationViewModelProvider = StateNotifierProvider<LocationViewModel, LocationState>(
+final locationViewModelProvider =
+    StateNotifierProvider<LocationViewModel, LocationState>(
   (ref) => LocationViewModel(ref.read(locationServiceProvider)),
 );
-final permissionViewModelProvider = StateNotifierProvider<PermissionViewmodel, PermissionState>(
-  (ref) => PermissionViewmodel(ref.read(permissionServiceProvider), ref.read(sharedPreferencesServiceProvider)),
+final permissionViewModelProvider =
+    StateNotifierProvider<PermissionViewmodel, PermissionState>(
+  (ref) => PermissionViewmodel(ref.read(permissionServiceProvider),
+      ref.read(sharedPreferencesServiceProvider)),
 );

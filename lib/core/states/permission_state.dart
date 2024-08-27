@@ -4,16 +4,22 @@ import 'package:permission_handler/permission_handler.dart';
 @immutable
 class PermissionState {
   const PermissionState({
-    this.permissionStatus = PermissionStatus.denied,
+    this.locationPermissionStatus = PermissionStatus.denied,
+    this.healthPermissionStatus = PermissionStatus.denied,
   });
 
-  final PermissionStatus permissionStatus;
+  final PermissionStatus locationPermissionStatus;
+  final PermissionStatus healthPermissionStatus;
 
   PermissionState copyWith({
-    PermissionStatus? permissionStatus,
+    PermissionStatus? locationPermissionStatus,
+    PermissionStatus? healthPermissionStatus,
   }) {
     return PermissionState(
-      permissionStatus: permissionStatus ?? this.permissionStatus,
+      locationPermissionStatus:
+          locationPermissionStatus ?? this.locationPermissionStatus,
+      healthPermissionStatus:
+          healthPermissionStatus ?? this.healthPermissionStatus,
     );
   }
 }
