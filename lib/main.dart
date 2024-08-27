@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:running_app/core/providers/view_model_provider.dart';
+import 'package:running_app/ui/screens/health_permission_screen.dart';
 import 'package:running_app/ui/screens/permission_screen.dart';
 import 'package:running_app/ui/screens/map_screen.dart';
 
@@ -31,9 +32,15 @@ class RunningApp extends ConsumerWidget {
         final permissionState = ref.watch(permissionViewModelProvider);
         return MaterialApp(
           title: 'Running Companion',
-          home: permissionState.permissionStatus == PermissionStatus.granted
-              ? const MapScreen()
-              : const PermissionScreen(),
+          home: permissionState.locationPermissionStatus !=
+                  PermissionStatus.granted
+              ? const LocationPermissionScreen()
+              : permissionState.healthPermissionStatus !=
+                      PermissionStatus.granted
+                  ? HealthPermissionScreen(
+                      permissionViewModel: permissionViewModel,
+                    )
+                  : const MapScreen(),
         );
       },
     );

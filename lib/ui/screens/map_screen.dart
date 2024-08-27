@@ -12,8 +12,10 @@ class MapScreen extends ConsumerStatefulWidget {
   ConsumerState<MapScreen> createState() => _MapScreenState();
 }
 
-class _MapScreenState extends ConsumerState<MapScreen> with TickerProviderStateMixin {
+class _MapScreenState extends ConsumerState<MapScreen>
+    with TickerProviderStateMixin {
   late final _animatedMapController = AnimatedMapController(vsync: this);
+  final double directionAngle = 45.0;
 
   @override
   void initState() {
@@ -60,12 +62,16 @@ class _MapScreenState extends ConsumerState<MapScreen> with TickerProviderStateM
                   ),
                   children: [
                     TileLayer(
-                      urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      urlTemplate:
+                          "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
                     ),
                     PolylineLayer(
                       polylines: [
                         Polyline(
-                            points: locationState.path.map((loc) => LatLng(loc.latitude, loc.longitude)).toList(),
+                            points: locationState.path
+                                .map((loc) =>
+                                    LatLng(loc.latitude, loc.longitude))
+                                .toList(),
                             color: Colors.blue,
                             strokeWidth: 4.0,
                             strokeJoin: StrokeJoin.round),
@@ -81,7 +87,7 @@ class _MapScreenState extends ConsumerState<MapScreen> with TickerProviderStateM
                             locationState.locationData!.longitude,
                           ),
                           child: const Icon(
-                            Icons.location_on,
+                            Icons.navigation,
                             color: Colors.red,
                             size: 40.0,
                           ),
@@ -100,11 +106,12 @@ class _MapScreenState extends ConsumerState<MapScreen> with TickerProviderStateM
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 16),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Icon(Icons.timer, color: Colors.white),
+                                const Icon(Icons.timer, color: Colors.white),
                                 const SizedBox(width: 8),
                                 Text(
                                   'Elapsed Time: ${locationState.elapsedTime}s',

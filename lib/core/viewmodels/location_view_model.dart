@@ -6,7 +6,7 @@ import '../services/location_service.dart';
 import '../states/location_state.dart';
 
 class LocationViewModel extends StateNotifier<LocationState> {
-  LocationViewModel(this._locationService) : super(LocationState());
+  LocationViewModel(this._locationService) : super(const LocationState());
 
   final LocationService _locationService;
   StreamSubscription<LocationData>? _positionSubscription;
