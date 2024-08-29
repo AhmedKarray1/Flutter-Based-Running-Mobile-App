@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:running_app/core/viewmodels/permission_view_model.dart';
 import 'package:running_app/ui/presentation/app_colors.dart';
 import 'package:running_app/ui/screens/map_screen.dart';
+import 'package:running_app/ui/screens/welcome_screen.dart';
 import 'package:running_app/ui/widgets/permission_widget.dart';
 
 import '../../core/providers/view_model_provider.dart';
@@ -44,14 +45,13 @@ class _HealthPermissionScreenState
                 if (context.mounted) {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const MapScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const WelcomeScreen()),
                   );
                 }
               }
             },
-            popupText: 'You should allow health permission to use the App'
-            
-            ),
+            popupText: 'You should allow health permission to use the App'),
       ),
     );
   }

@@ -1,13 +1,18 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:running_app/core/providers/view_model_provider.dart';
+import 'package:running_app/firebase_options.dart';
+import 'package:running_app/ui/screens/welcome_screen.dart';
 import 'package:running_app/ui/screens/health_permission_screen.dart';
 import 'package:running_app/ui/screens/permission_screen.dart';
-import 'package:running_app/ui/screens/map_screen.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const ProviderScope(child: RunningApp()));
 }
 
@@ -40,7 +45,7 @@ class RunningApp extends ConsumerWidget {
                   ? HealthPermissionScreen(
                       permissionViewModel: permissionViewModel,
                     )
-                  : const MapScreen(),
+                  : const WelcomeScreen(),
         );
       },
     );
