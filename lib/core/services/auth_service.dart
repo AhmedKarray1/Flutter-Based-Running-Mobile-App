@@ -14,7 +14,9 @@ class AuthService {
       final userCredential = await authInstance.createUserWithEmailAndPassword(
         email: email,
         password: password,
+        
       );
+      
       await firebaseFirestore
           .collection('users')
           .doc(userCredential.user!.uid)
@@ -29,7 +31,6 @@ class AuthService {
         password: password,
       );
 
-      await authInstance.currentUser?.reload();
 
       return userCredential.user;
     } on FirebaseAuthException catch (e) {

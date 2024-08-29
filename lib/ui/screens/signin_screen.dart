@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:running_app/core/providers/view_model_provider.dart';
+import 'package:running_app/ui/screens/map_screen.dart';
 import 'package:running_app/ui/screens/signup_screen.dart';
 import '../presentation/app_colors.dart';
 
@@ -148,6 +149,15 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           _emailController.text,
                           _passwordController.text,
                         );
+
+                        if (authState.user != null) {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const MapScreen(),
+                            ),
+                          );
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(

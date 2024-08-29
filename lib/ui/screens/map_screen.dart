@@ -43,7 +43,9 @@ class _MapScreenState extends ConsumerState<MapScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Map Screen'),
+        title: GestureDetector(
+            onTap: () => ref.read(authViewModelProvider.notifier).signOut(),
+            child: const Text('Map Screen')),
       ),
       body: !locationState.isLocationReady
           ? const Center(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:running_app/core/providers/view_model_provider.dart';
+import 'package:running_app/ui/screens/map_screen.dart';
 import '../presentation/app_colors.dart';
 
 class SignUpScreen extends ConsumerStatefulWidget {
@@ -168,13 +169,22 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ),
                     SizedBox(height: deviceHeight * 0.02),
                     GestureDetector(
-                      onTap: () {
-                        authViewModel.signUp(
+                      onTap: () async {
+                        await authViewModel.signUp(
                           _usernameController.text,
                           _emailController.text,
                           _passwordController.text,
                           int.tryParse(_ageController.text) ?? 0,
                         );
+                        print('authState: ${authState.user}');
+                        if (authState.user != null) {
+                          if (context.mounted) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MapScreen()));
+                          }
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.symmetric(
@@ -186,7 +196,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         child: authState.isLoading
                             ? const CircularProgressIndicator(
                                 valueColor:
-                                    AlwaysStoppedAnimation(Colors.white),
+                                    AlwaysStoppedAnimation(AppColors.darkGray1),
                               )
                             : const Text(
                                 'Sign Up',
