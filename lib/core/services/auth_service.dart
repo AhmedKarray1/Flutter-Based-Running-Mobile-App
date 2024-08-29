@@ -10,6 +10,7 @@ class AuthService {
   Future<User?> signUp(
       String username, String email, String password, int age) async {
     try {
+      await authInstance.signOut();
       final userCredential = await authInstance.createUserWithEmailAndPassword(
         email: email,
         password: password,
@@ -22,6 +23,14 @@ class AuthService {
         'email': email,
         'age': age,
       });
+
+      final AuthCredential authCredential = EmailAuthProvider.credential(
+        email: email,
+        password: password,
+      );
+
+      await authInstance.currentUser?.reload();
+
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
       print('FirebaseAuthException: ${e.message}');

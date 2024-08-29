@@ -107,7 +107,7 @@ class WelcomeScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Already have an account? ',
+              const Text('Do not have an account? ',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
@@ -120,7 +120,7 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Sign in',
+                  'Sign up',
                   style: TextStyle(
                     color: AppColors.limeGreen1,
                     fontSize: 17,
