@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:running_app/ui/presentation/app_colors.dart';
 
 class AnimatedPopup extends StatelessWidget {
-  const AnimatedPopup({super.key});
+  const AnimatedPopup({super.key, required this.description});
+
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +25,13 @@ class AnimatedPopup extends StatelessWidget {
                   height: deviceHeight * 0.2,
                   width: deviceWidth * 0.6,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.black,
                     borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
+                        color: AppColors.limeGreen1.withOpacity(0.5),
                         blurRadius: 10,
-                        offset: const Offset(0, 5),
+                        
                       ),
                     ],
                   ),
@@ -37,9 +39,9 @@ class AnimatedPopup extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
-                        'You should allow location permission to use the App',
-                        style: TextStyle(fontSize: 15, color: Colors.black),
+                       Text(
+                        description,
+                        style: const TextStyle(fontSize: 15, color: AppColors.limeGreen1),
                         textAlign: TextAlign.center,
                       ),
                       ElevatedButton(
